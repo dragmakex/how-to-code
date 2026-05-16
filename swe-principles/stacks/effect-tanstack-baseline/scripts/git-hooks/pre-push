@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+echo "🔍 Running pre-push validation..."
+echo ""
+echo "⚠️  This will take a while (typecheck, lint, tests, coverage, browser tests, perf check)"
+echo ""
+
+# Run full validate as documented in CONTRIBUTING.md
+bun run validate
+
+echo ""
+echo "✅ Pre-push validation passed!"
+echo ""

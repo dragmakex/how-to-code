@@ -1,0 +1,58 @@
+{
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "scripts/**/*.ts",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "docs/reference/**/*.ts",
+    "docs/reference/**/*.tsx"
+  ],
+  "exclude": ["./.worktrees", "./.repos", "node_modules"],
+  "compilerOptions": {
+    "target": "ES2022",
+    "jsx": "react-jsx",
+    "module": "preserve",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"],
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    /* Linting */
+    "skipLibCheck": true,
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "quickinfoEffectParameters": "always",
+        "namespaceImportPackages": ["effect", "@effect/*"],
+        "topLevelNamedReexports": "follow",
+        "diagnosticSeverity": {
+          "importFromBarrel": "error"
+        },
+        "importAliases": {
+          "Array": "Arr",
+          "Function": "Func",
+          "Boolean": "Bool",
+          "Number": "Num",
+          "String": "Str"
+        }
+      }
+    ]
+  }
+}

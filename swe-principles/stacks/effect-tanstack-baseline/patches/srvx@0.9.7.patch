@@ -1,0 +1,25 @@
+diff --git a/dist/adapters/node.mjs b/dist/adapters/node.mjs
+index ae11e0bf9d220b5e4cd60f129c6493203866c23a..8f90efc8042270393877a4bc913e61c396bc7e4b 100644
+--- a/dist/adapters/node.mjs
++++ b/dist/adapters/node.mjs
+@@ -226,7 +226,19 @@ const NodeRequest = /* @__PURE__ */ (() => {
+ 					this.#abortController?.abort?.(err);
+ 				};
+ 				req.once("error", abort);
+-				req.once("end", abort);
++				// FIX: The original code used req.once("end", abort) which fires when the request
++				// body is fully received - a normal event that shouldn't trigger abort. Instead,
++				// we listen on the response object's "close" event which fires when the connection
++				// closes. The writableEnded check ensures we only abort if the response wasn't
++				// fully sent (i.e., client disconnected before we finished responding).
++				const res = this.runtime?.node?.res;
++				if (res) {
++					res.on("close", () => {
++						if (!res.writableEnded && !this.#abortController?.signal.aborted) {
++							abort();
++						}
++					});
++				}
+ 			}
+ 			return this.#abortController;
+ 		}

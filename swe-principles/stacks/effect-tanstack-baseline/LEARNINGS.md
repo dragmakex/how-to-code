@@ -1,0 +1,1 @@
+- 2026-04-11: `oxlint` panics when linting files outside the repository root (`path is expected to be under the root`). Keep lint fixtures under `cwd()` for rule tests.

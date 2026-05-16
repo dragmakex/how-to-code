@@ -1,0 +1,49 @@
+diff --git a/dist/_build/vite.plugin.mjs b/dist/_build/vite.plugin.mjs
+index 692b0229704ff6f5fc116eb236d5e74099349693..42fcc333c37e9706174d9fcfe2831edc1c96b723 100644
+--- a/dist/_build/vite.plugin.mjs
++++ b/dist/_build/vite.plugin.mjs
+@@ -342,13 +342,25 @@ async function configureViteDevServer(ctx, server) {
+ 			req: nodeReq,
+ 			res: nodeRes
+ 		});
+-		const devAppRes = await ctx.devApp.fetch(req);
+-		if (nodeRes.writableEnded || nodeRes.headersSent) return;
+-		if (devAppRes.status !== 404) return await sendNodeResponse(nodeRes, devAppRes);
+-		const envRes = await nitroEnv$1.dispatchFetch(req);
+-		if (nodeRes.writableEnded || nodeRes.headersSent) return;
+-		if (envRes.status !== 404) return await sendNodeResponse(nodeRes, envRes);
+-		return next();
++		try {
++			const devAppRes = await ctx.devApp.fetch(req);
++			if (nodeRes.writableEnded || nodeRes.headersSent) return;
++			if (devAppRes.status !== 404) return await sendNodeResponse(nodeRes, devAppRes);
++			const envRes = await nitroEnv$1.dispatchFetch(req);
++			if (nodeRes.writableEnded || nodeRes.headersSent) return;
++			if (envRes.status !== 404) return await sendNodeResponse(nodeRes, envRes);
++			return next();
++		} catch (err) {
++			// Handle client disconnect (AbortError) gracefully
++			if (err?.name === "AbortError") {
++				if (!nodeRes.writableEnded) {
++					nodeRes.statusCode = 499;
++					nodeRes.end();
++				}
++				return;
++			}
++			throw err;
++		}
+ 	};
+ 	server.middlewares.use(function nitroDevMiddlewarePre(req, res, next) {
+ 		const fetchDest = req.headers["sec-fetch-dest"];
+diff --git a/dist/_dev.mjs b/dist/_dev.mjs
+index 579fce87dd41fea2f66a9c4676d9590cd536fa40..a110d4474203ab6856aff6133699e3b757a9e33c 100644
+--- a/dist/_dev.mjs
++++ b/dist/_dev.mjs
+@@ -60,6 +60,7 @@ function fetchAddress(addr, input, inputInit) {
+ 			method: input.method,
+ 			headers: input.headers,
+ 			body: input.body,
++			signal: input.signal,
+ 			...inputInit
+ 		};
+ 	} else {
