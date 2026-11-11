@@ -56,6 +56,8 @@ Route by task:
 - security review, audit readiness, threat modeling → `swe-principles/fields/08-security-and-audit-readiness.md`
 - docs, skills, repo memory, knowledge management → `swe-principles/fields/09-documentation-skills-and-knowledge-management.md`
 - agent workflow discipline, human-in-the-loop judgment, anti-booboo controls → `swe-principles/fields/10-agentic-engineering-and-human-agency.md`
+- safety-first systems code, explicit bounds, assertions, resource and latency predictability → `swe-principles/fields/11-safety-performance-and-bounded-systems.md`
+- product delivery, repository setup, layered testing, bug fixing, adversarial review, doc sync → `swe-principles/fields/12-product-delivery-and-repository-operations.md`
 
 Route by stack when there is a close match:
 

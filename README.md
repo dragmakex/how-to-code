@@ -20,7 +20,7 @@ The main skill file. It holds the core taste, a little top-level guidance, and r
 The handbook index. Start here if you want the map of the deeper material.
 
 ### `swe-principles/fields/`
-General software-engineering guides. These are the default docs for architecture, guarantees, testing, version control, observability, security, docs, and agent workflow discipline.
+General software-engineering guides. These are the default docs for architecture, guarantees, testing, version control, observability, security, docs, agent workflow discipline, safety-critical systems, and product delivery.
 
 ### `swe-principles/checklists/`
 Short handoff gates for implementation, review, and release readiness.
@@ -48,6 +48,7 @@ Then:
 Keep the shape of the repo intact:
 
 - add general ideas to `swe-principles/fields/`
+- keep source-specific ideas generalized and route them only where their stricter posture fits
 - add handoff gates to `swe-principles/checklists/`
 - add close-match stack overlays to `swe-principles/stacks/`
 - update `SKILL.md` only with light routing, not big doctrine dumps

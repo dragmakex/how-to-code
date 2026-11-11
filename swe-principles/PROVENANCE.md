@@ -93,6 +93,19 @@ The general field guides and stack overlays synthesize ideas from:
   - x-ray style audit-readiness workflows
   - entry-point and invariant review
   - repeated, scoped, multi-lens security review
+- TigerStyle / TigerBeetle engineering guidance
+  - safety, performance, and developer experience in that order
+  - bounded control flow and resource usage
+  - assertion-driven invariants and explicit error handling
+  - capacity sketches, batching, dependency restraint, and precise naming
+- The Closed Loop Company (`tclc-skills`)
+  - docs-before-code planning and explicit non-goals
+  - one vertical slice before parallel implementation
+  - layered testing, production builds in CI, and real-environment QA
+  - reproduce-first bug fixing and regression evidence
+  - adversarial review, repository-memory synchronization, and idempotent operations
+
+The TCLC synthesis uses its product-engineering material only. It does not import the private YC playbooks, company secrets, executable provisioning assets, or vendor-specific house defaults as universal guidance.
 
 ## Interpretation rule
 

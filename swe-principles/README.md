@@ -42,6 +42,8 @@ swe-principles/
     08-security-and-audit-readiness.md
     09-documentation-skills-and-knowledge-management.md
     10-agentic-engineering-and-human-agency.md
+    11-safety-performance-and-bounded-systems.md
+    12-product-delivery-and-repository-operations.md
   checklists/
     implementer.md
     reviewer.md
@@ -112,6 +114,8 @@ This repository synthesizes ideas from:
 - observability, tracing, profiling, and health checks
 - x-ray style security review and audit readiness
 - knowledge management for docs, skills, and repo structure
+- TigerStyle-inspired bounded control flow, assertions, capacity planning, and predictable performance
+- TCLC-inspired product delivery, repository operations, reproduce-first bug fixing, and anti-drift discipline
 
 ## Bulgarian precision
 
@@ -146,7 +150,9 @@ If a principle cannot survive contact with production, it does not belong here.
 4. `fields/05-testing-and-verification.md`
 5. `fields/06-version-control-collaboration-and-review.md`
 6. `fields/10-agentic-engineering-and-human-agency.md`
-7. `checklists/implementer.md`
+7. `fields/12-product-delivery-and-repository-operations.md`
+8. Add `fields/11-safety-performance-and-bounded-systems.md` for high-consequence or resource-sensitive work
+9. `checklists/implementer.md`
 
 ### If you are reviewing or preparing a release
 
